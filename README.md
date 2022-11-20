@@ -10,8 +10,11 @@ Kann mithilfe des LabyMod-UnicaCity-Addons FakeReinfs, FakeReinfAccepts und Fake
                             Das "n" muss für eine SMS vorhanden sein!
 
 
-**/fakeacceptreinf (f/d/gr/c/sms) (name) (distance)**
+**/fakeacceptreinf (f/d/gr/c) (name) (distance)**
 - *Um eine Reinf-Annehmenachricht in verschiedenen Chats zu simulieren.*
+
+        Sonderfall bei SMS: /fakesloc (sms) (smsname) (name) (distance) 
+                            Das "n" muss für eine SMS vorhanden sein!
 
 
 **/fakesloc (f/d/gr/c) (name) (x) (y) (z)**
