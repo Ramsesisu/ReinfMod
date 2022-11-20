@@ -29,7 +29,7 @@ public class FakeReinfCommand extends CommandBase implements IClientCommand {
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/fakereinf (f/d/gr/c/sms) (r/m/lb/d/da/ct/p/b/gn/t) (x) (y) (z)";
+        return "/fakereinf (f/d/gr/c/sms) (r/m/lb/e/da/ct/p/b/gn/t) (x) (y) (z)";
     }
 
     @Override
