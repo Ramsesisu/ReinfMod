@@ -15,7 +15,7 @@ group = 'me.rqmses'
 version = '1.0'
 
 java {
-    archivesBaseName = 'reinfmod'
+    archivesBaseName = 'ReinfMod'
     toolchain.languageVersion = JavaLanguageVersion.of(8)
 }
 

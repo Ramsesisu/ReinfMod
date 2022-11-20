@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Specification-Title: reinfmod
+Specification-Version: 1
+Implementation-Title: reinfmod
+Implementation-Version: 1.0
+Implementation-Timestamp: 2022-11-20T10:18:48+0100
+
