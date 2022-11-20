@@ -24,6 +24,7 @@ public class NumberListener {
             lastCheckedNumber = Integer.parseInt(numberMatcher.group(1));
             if (FakeReinfCommand.isActive || FakeAcceptReinfCommand.isActive || FakeSLocCommand.isActive) {
                 e.setCanceled(true);
+                FakeReinfCommand.isActive = FakeAcceptReinfCommand.isActive = FakeSLocCommand.isActive = false;
             }
         }
     }

@@ -17,6 +17,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import scala.collection.parallel.ParIterableLike;
 
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,14 +41,13 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        isActive = true;
         EntityPlayerSP player = Minecraft.getMinecraft().player;
 
         player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "Der Fake-SLoc wird get\u00E4tigt!"));
 
-        String Chat = "";
+        final String[] Chat = {""};
         String name;
-        String number;
+        final String[] number = new String[1];
         int locX = player.getPosition().getX();
         int locY = player.getPosition().getY();
         int locZ = player.getPosition().getZ();
@@ -53,30 +55,26 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
         if (args.length >= 2) {
             switch (args[0]) {
                 case "f":
-                    Chat = "/f";
+                    Chat[0] = "/f";
                     break;
                 case "d":
-                    Chat = "/d";
+                    Chat[0] = "/d";
                     break;
                 case "gr":
-                    Chat = "/gr";
+                    Chat[0] = "/gr";
                     break;
                 case "c":
                     break;
                 case "sms":
                     player.sendChatMessage("/nummer " + args[1]);
-                    number = String.valueOf(NumberListener.lastCheckedNumber);
-                    Chat = "/sms " + number + " " + player.getName()+":";
                     break;
                 default:
                     player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms (name) (x) (y) (z)"));
-                    isActive = false;
                     return;
             }
             name = args[1];
         } else {
             player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms name (x) (y) (z)"));
-            isActive = false;
             return;
         }
         if (args.length >= 5) {
@@ -85,9 +83,21 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
             locZ = Integer.parseInt(args[4]);
         }
 
-        player.sendChatMessage(Chat + " Positionsteilung f\u00FCr "+name+"! -> X: "+locX+" | Y: "+locY+" | Z: "+locZ);
-
-        isActive = false;
+        Timer timer = new Timer();
+        final String[] finalChat = {Chat[0]};
+        int finalLocX = locX;
+        int finalLocY = locY;
+        int finalLocZ = locZ;
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (Objects.equals(args[0], "sms")) {
+                    number[0] = String.valueOf(NumberListener.lastCheckedNumber);
+                    finalChat[0] = "/sms " + number[0] + " " + player.getName()+":";
+                }
+                player.sendChatMessage(finalChat[0] + " Positionsteilung f\u00FCr "+name+"! -> X: "+ finalLocX +" | Y: "+ finalLocY +" | Z: "+ finalLocZ);
+            }
+        }, 250L);
     }
 
     @Override

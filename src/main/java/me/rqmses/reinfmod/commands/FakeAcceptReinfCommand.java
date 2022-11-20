@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber
@@ -34,53 +36,60 @@ public class FakeAcceptReinfCommand extends CommandBase implements IClientComman
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        isActive = true;
         EntityPlayerSP player = Minecraft.getMinecraft().player;
 
         player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "Die Fake-Reinforcementannahme wird get\u00E4tigt!"));
 
-        String Chat = "";
+        final String[] Chat = {""};
         String name = "";
-        String number;
+        final String[] number = new String[1];
         String distance = "";
 
         if (args.length >= 3) {
             switch (args[0]) {
                 case "f":
-                    Chat = "/f";
+                    Chat[0] = "/f";
                     break;
                 case "d":
-                    Chat = "/d";
+                    Chat[0] = "/d";
                     break;
                 case "gr":
-                    Chat = "/gr";
+                    Chat[0] = "/gr";
                     break;
                 case "c":
                     break;
                 case "sms":
                     player.sendChatMessage("/nummer " + args[1]);
-                    number = String.valueOf(NumberListener.lastCheckedNumber);
-                    Chat = "/sms " + number + " " + player.getName()+":";
                     break;
                 default:
                     player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakeacceptreinf f/d/gr/c/sms (name) (distance)"));
-                    isActive = false;
                     return;
             }
             name = args[1];
             distance = args[2];
         } else {
             player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakeacceptreinf f/d/gr/c/sms name distance"));
-            isActive = false;
             return;
         }
         if (Objects.equals(args[0], "sms")) {
             name = args[2];
             distance = args[3];
         }
-        player.sendChatMessage(Chat + " "+name+", ich bin zu deinem Verst\u00E4rkungsruf unterwegs! ("+distance+" Meter entfernt)");
 
-        isActive = false;
+        Timer timer = new Timer();
+        final String[] finalChat = {Chat[0]};
+        String finalName = name;
+        String finalDistance = distance;
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (Objects.equals(args[0], "sms")) {
+                    number[0] = String.valueOf(NumberListener.lastCheckedNumber);
+                    finalChat[0] = "/sms " + number[0] + " " + player.getName()+":";
+                }
+                player.sendChatMessage(finalChat[0] + " "+ finalName +", ich bin zu deinem Verst\u00E4rkungsruf unterwegs! ("+ finalDistance +" Meter entfernt)");
+            }
+        }, 250L);
     }
 
     @Override
