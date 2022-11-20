@@ -139,7 +139,7 @@ public class FakeReinfCommand extends CommandBase implements IClientCommand {
                 }
                 player.sendChatMessage(finalChat[0] + " Ben\u00F6tige Verst\u00E4rkung! -> X: "+ finalLocX +" | Y: "+ finalLocY +" | Z: "+ finalLocZ);
             }
-        }, 400L);
+        }, 250L);
 
         isActive = false;
     }
