@@ -6,8 +6,7 @@ Kann mithilfe des LabyMod-UnicaCity-Addons FakeReinfs, FakeReinfAccepts und Fake
 **/fakereinf (f/d/gr/c) (r/m/lb/e/da/ct/p/b/gn/t) (x) (y) (z)**
 - *Um einen Reinf in verschiedenen Chats zu simulieren.*
 
-        Sonderfall bei SMS: /fakereinf (sms) (smsname) n (x) (y) (z) 
-                            Das "n" muss für eine SMS vorhanden sein!
+        Sonderfall bei SMS: /fakereinf (sms) (smsname) (x) (y) (z) 
 
 
 **/fakeacceptreinf (f/d/gr/c) (name) (distance)**
