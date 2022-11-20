@@ -3,5 +3,5 @@ Specification-Title: reinfmod
 Specification-Version: 1
 Implementation-Title: reinfmod
 Implementation-Version: 1.0
-Implementation-Timestamp: 2022-11-20T14:59:00+0100
+Implementation-Timestamp: 2022-11-20T15:04:06+0100
 

@@ -41,6 +41,7 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+        isActive = true;
         EntityPlayerSP player = Minecraft.getMinecraft().player;
 
         player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "Der Fake-SLoc wird get\u00E4tigt!"));
@@ -70,11 +71,13 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
                     break;
                 default:
                     player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms (name) (x) (y) (z)"));
+                    isActive = false;
                     return;
             }
             name = args[1];
         } else {
             player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms name (x) (y) (z)"));
+            isActive = false;
             return;
         }
         if (args.length >= 5) {
@@ -96,6 +99,7 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
                     finalChat[0] = "/sms " + number[0] + " " + player.getName()+":";
                 }
                 player.sendChatMessage(finalChat[0] + " Positionsteilung f\u00FCr "+name+"! -> X: "+ finalLocX +" | Y: "+ finalLocY +" | Z: "+ finalLocZ);
+                isActive = false;
             }
         }, 250L);
     }

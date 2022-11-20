@@ -36,6 +36,7 @@ public class FakeAcceptReinfCommand extends CommandBase implements IClientComman
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+        isActive = true;
         EntityPlayerSP player = Minecraft.getMinecraft().player;
 
         player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "Die Fake-Reinforcementannahme wird get\u00E4tigt!"));
@@ -63,12 +64,14 @@ public class FakeAcceptReinfCommand extends CommandBase implements IClientComman
                     break;
                 default:
                     player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakeacceptreinf f/d/gr/c/sms (name) (distance)"));
+                    isActive = false;
                     return;
             }
             name = args[1];
             distance = args[2];
         } else {
             player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakeacceptreinf f/d/gr/c/sms name distance"));
+            isActive = false;
             return;
         }
         if (Objects.equals(args[0], "sms")) {
@@ -88,6 +91,7 @@ public class FakeAcceptReinfCommand extends CommandBase implements IClientComman
                     finalChat[0] = "/sms " + number[0] + " " + player.getName()+":";
                 }
                 player.sendChatMessage(finalChat[0] + " "+ finalName +", ich bin zu deinem Verst\u00E4rkungsruf unterwegs! ("+ finalDistance +" Meter entfernt)");
+                isActive = false;
             }
         }, 250L);
     }
