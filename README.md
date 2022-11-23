@@ -3,19 +3,19 @@ Kann mithilfe des LabyMod-UnicaCity-Addons FakeReinfs, FakeReinfAccepts und Fake
 
 ***Syntax:***
 
-**/fakereinf (f/d/gr/c) (r/m/lb/e/da/ct/p/b/gn/t) (x) (y) (z)**
+**/fakereinf (f/d/gr/c/sms) (r/m/lb/e/da/ct/p/b/gn/t) (x) (y) (z)**
 - *Um einen Reinf in verschiedenen Chats zu simulieren.*
 
         Sonderfall bei SMS: /fakereinf (sms) (smsname) (x) (y) (z) 
 
 
-**/fakeacceptreinf (f/d/gr/c) (name) (distance)**
+**/fakeacceptreinf (f/d/gr/c/sms) (name) (distance)**
 - *Um eine Reinf-Annehmenachricht in verschiedenen Chats zu simulieren.*
 
         Sonderfall bei SMS: /fakesloc (sms) (smsname) (name) (distance) 
 
 
-**/fakesloc (f/d/gr/c) (name) (x) (y) (z)**
+**/fakesloc (f/d/gr/c/sms) (name) (x) (y) (z)**
 - *Um einen SLoc in verschiedenen Chats zu simulieren.*
     
         Sonderfall bei SMS: /fakesloc (sms) (smsname) (name) (x) (y) (z) 
