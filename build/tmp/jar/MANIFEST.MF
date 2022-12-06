@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Specification-Title: reinfmod
 Specification-Version: 1
-Implementation-Title: reinfmod
-Implementation-Version: 1.0
-Implementation-Timestamp: 2022-11-20T15:04:06+0100
+Implementation-Title: ReinfMod
+Implementation-Version: 1.1
+Implementation-Timestamp: 2022-12-06T02:37:33+0100
 

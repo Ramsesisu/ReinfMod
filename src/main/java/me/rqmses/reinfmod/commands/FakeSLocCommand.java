@@ -36,7 +36,7 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/fakesloc (f/d/gr/c/sms) (name) (x) (y) (z)";
+        return "/fakesloc (f/sf/d/gr/grl/c/w/me/sms) (name) (x) (y) (z)";
     }
 
     @Override
@@ -53,30 +53,45 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
         int locY = player.getPosition().getY();
         int locZ = player.getPosition().getZ();
 
+        if (args.length < 2) {
+            player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/sf/d/gr/grl/c/w/me/sms (name) (x) (y) (z)"));
+            return;
+        }
+
         if (args.length >= 2) {
             switch (args[0]) {
                 case "f":
                     Chat[0] = "/f";
                     break;
+                case "sf":
+                    Chat[0] = "/sf";
+                    break;
                 case "d":
                     Chat[0] = "/d";
                     break;
                 case "gr":
+                case "grl":
                     Chat[0] = "/gr";
                     break;
                 case "c":
+                    break;
+                case "w":
+                    Chat[0] = "/w";
+                    break;
+                case "me":
+                    Chat[0] = "/me";
                     break;
                 case "sms":
                     player.sendChatMessage("/nummer " + args[1]);
                     break;
                 default:
-                    player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms (name) (x) (y) (z)"));
+                    player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/sf/d/gr/grl/c/w/me/sms (name) (x) (y) (z)"));
                     isActive = false;
                     return;
             }
             name = args[1];
         } else {
-            player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/d/gr/c/sms name (x) (y) (z)"));
+            player.sendMessage(new TextComponentString(TextFormatting.DARK_GRAY + "[" + TextFormatting.DARK_GREEN + "ReinfMod" + TextFormatting.DARK_GRAY + "] " + TextFormatting.GREEN + "/fakesloc f/sf/d/gr/grl/c/w/me/sms name (x) (y) (z)"));
             isActive = false;
             return;
         }
@@ -94,6 +109,9 @@ public class FakeSLocCommand extends CommandBase implements IClientCommand {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                if (Objects.equals(args[0], "gr") || Objects.equals(args[0], "w") || Objects.equals(args[0], "me")) {
+                    finalChat[0] = finalChat[0] + " " + player.getName() + ":";
+                }
                 if (Objects.equals(args[0], "sms")) {
                     number[0] = String.valueOf(NumberListener.lastCheckedNumber);
                     finalChat[0] = "/sms " + number[0] + " " + player.getName()+":";

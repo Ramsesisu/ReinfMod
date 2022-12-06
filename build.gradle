@@ -12,7 +12,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 
 group = 'me.rqmses'
-version = '1.0'
+version = '1.1'
 
 java {
     archivesBaseName = 'ReinfMod'
